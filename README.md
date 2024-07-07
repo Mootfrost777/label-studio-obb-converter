@@ -1,4 +1,4 @@
-### Fetch images from label studio
+### Fetch images from label studio(slow)
 ```python converter.py "<json-min path>" "<label studio url>" "<label studio token>"```
 
 
