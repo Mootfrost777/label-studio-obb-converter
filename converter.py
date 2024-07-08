@@ -34,7 +34,7 @@ def conv_percent(c, l):
 
 def transform_coordinates(l: Label) -> tuple:
     c1, c2, c3, c4 = (l.x, l.y), (l.x + l.w, l.y), (l.x + l.w, l.y + l.h), (l.x, l.y + l.h)
-    return conv_percent(c1, l), conv_percent(transform(c2, c1, l.r), l), conv_percent(transform(c3, c1, l.r), l), conv_percent(transform(c3, c1, l.r), l)
+    return conv_percent(c1, l), conv_percent(transform(c2, c1, l.r), l), conv_percent(transform(c3, c1, l.r), l), conv_percent(transform(c4, c1, l.r), l)
 
 
 print('---------------------')
@@ -66,11 +66,6 @@ for obj in dataset:
         name = obj['image'].split('d=')[-1].split('%5C')[-1]
         shutil.copy(os.path.join('images', name), os.path.join(path, 'images', name))
         name = pathlib.Path(name).stem
-
-    # img_data = requests.get(url).content
-    # with open(os.path.join(path, 'images', name + pathlib.Path(url).suffix), 'wb') as f:
-    #     f.write(img_data)
-
     output = []
     if 'label' in obj:
         pass
@@ -91,7 +86,7 @@ with open(os.path.join(path, 'classes'), 'w') as f:
 
 
 shutil.make_archive(path, format='zip', root_dir=path)
-shutil.rmtree(path)
+#shutil.rmtree(path)
 
 print(f'Completed in: {time.time() - start_time}')
 print(f'Saved as {path}.zip')
