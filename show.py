@@ -16,9 +16,11 @@ with open(os.path.join(labels, file)) as f:
     for line in f.readlines():
         data = list(map(float, line.split()))
         print(data)
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)]
         for i in range(1, len(data), 2):
+            color = colors[(i - 1) // 2]
             cv2.circle(frame, (round(data[i] * width), round(data[i + 1] * height)), 3, color, 2)
+            cv2.putText(frame, str((i - 1) // 2), (round(data[i] * width) - 5, round(data[i + 1] * height) - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2, cv2.LINE_AA)
 
 
 cv2.imshow("Input", frame)
